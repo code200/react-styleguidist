@@ -52,7 +52,7 @@
     "findup": "^0.1.5",
     "function.name-polyfill": "^1.0.6",
     "github-slugger": "^1.2.1",
-    "glob": "^7.1.5",
+    "glob": "^9.3.5",
     "glogg": "^1.0.2",
     "hash-sum": "^2.0.0",
     "is-plain-obj": "^1.1.0",
