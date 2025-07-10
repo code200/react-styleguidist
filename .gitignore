@@ -2,14 +2,6 @@ node_modules/
 /examples/**/styleguide/build
 /examples/**/styleguide/index.html
 /.publish/
-# ignore files in lib except lib/bin and lib/scripts
-lib/**
-!lib/bin
-!lib/bin/**
-!lib/scripts
-!lib/scripts/**
-!lib/client
-!lib/client/**
 
 /coverage/
 Changelog.md
