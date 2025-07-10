@@ -19,14 +19,16 @@ const getComponentGlobs = (components: string | string[] | (() => string[])): st
 const getFilesMatchingGlobs = (components: string[], rootDir?: string, ignore?: string[]) => {
 	ignore = ignore || [];
 	return components
-		.map(listItem =>
+		.map((listItem) =>
 			glob.sync(listItem, {
 				cwd: rootDir,
 				ignore,
 				absolute: true,
 			})
 		)
-		.reduce((accumulator, current) => accumulator.concat(current), []);
+		.reduce((accumulator, current) => accumulator.concat(current), [])
+		.filter((file, index, arr) => arr.indexOf(file) === index) // remove dupes
+		.sort(); // sort for consistent ordering
 };
 
 /**
@@ -53,7 +55,7 @@ export default function getComponentFiles(
 	const componentFiles = getFilesMatchingGlobs(componentGlobs, rootDir, ignore);
 
 	// Get absolute component file paths with correct slash separator format
-	const resolvedComponentFiles = componentFiles.map(file => path.resolve(file));
+	const resolvedComponentFiles = componentFiles.map((file) => path.resolve(file));
 
 	return resolvedComponentFiles;
 }

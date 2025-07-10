@@ -45,7 +45,15 @@ const getSectionComponents = (
 		ignore = ignore.concat(_.castArray(section.ignore));
 	}
 
-	return getComponents(getComponentFiles(section.components, config.configDir, ignore), config);
+	const componentFiles = getComponentFiles(section.components, config.configDir, ignore);
+
+	// deduplicate by component directory to handle both ComponentName.js and index.js
+	const uniqueFiles = componentFiles.filter((file, index, arr) => {
+		const dir = path.dirname(file);
+		return arr.findIndex((f) => path.dirname(f) === dir) === index;
+	});
+
+	return getComponents(uniqueFiles, config);
 };
 
 /**
@@ -62,7 +70,7 @@ export default function getSections(
 	parentDepth?: number
 ): Rsg.LoaderSection[] {
 	// eslint-disable-next-line @typescript-eslint/no-use-before-define
-	return sections.map(section => processSection(section, config, parentDepth));
+	return sections.map((section) => processSection(section, config, parentDepth));
 }
 
 /**
