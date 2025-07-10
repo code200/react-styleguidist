@@ -8,6 +8,8 @@ lib/**
 !lib/bin/**
 !lib/scripts
 !lib/scripts/**
+!lib/client
+!lib/client/**
 
 /coverage/
 Changelog.md
